@@ -1,5 +1,7 @@
 const express = require('express'); //import express
-const apiRouter = require('./routes'); // this is the router
+const feederRoutes = require('./routes/feeders'); // this is the router
+const dayRoute = require('./routes/daydata');
+const feedsRoute = require('./routes/feeds')
 
 //initialize the server
 const app = express();
@@ -7,7 +9,9 @@ const app = express();
 //convert response to json
 app.use(express.json());
 
-app.use('/api/chelo', apiRouter);
+app.use('/api/feeders', feederRoutes);
+app.use('/api/daydata', dayRoute);
+app.use('/api/feeds', feedsRoute);
 
 //listen on a port
 app.listen(process.env.PORT || '3000', () => {

@@ -10,7 +10,8 @@ const connectionPool = mysql.createPool({
 });
 
 const chickenDB = {};
-chickenDB.all = () => {
+
+chickenDB.allDays = () => {
 	return new Promise((resolve, reject) => {
 		let sql = `SELECT * FROM DayData`;
 		connectionPool.query(sql, (err, results) => {
@@ -22,4 +23,29 @@ chickenDB.all = () => {
 	});
 };
 
+chickenDB.allFeeders = () => {
+	return new Promise((resolve, reject) => {
+		let sql = `SELECT * FROM feeder`;
+		connectionPool.query(sql, (err, results) => {
+			if (err) {
+				return reject(err);
+			}
+			return resolve(results);
+		});
+	});
+};
+
+chickenDB.allFeeds = () => {
+	return new Promise((resolve, reject) => {
+		let sql = `SELECT * from feeds`;
+		connectionPool.query(sql, (err, results) => {
+			if (err) {
+				return reject(err);
+			}
+			return resolve(results);
+		});
+	});
+};
+
 module.exports = chickenDB;
+
