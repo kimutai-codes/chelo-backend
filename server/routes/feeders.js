@@ -5,13 +5,11 @@ const db = require('../db');
 //feeders route
 //get all feeders
 router.get('/', async (req, res, next) => {
-	try {
-		let results = await db.allFeeders();
+	let sql = `SELECT * FROM feeder`;
+	db.query(sql, (err, results) => {
+		if (err) throw err;
 		res.json(results);
-	} catch (e) {
-		console.log(e);
-		res.sendStatus(500);
-	}
+	});
 });
 
 module.exports = router;
