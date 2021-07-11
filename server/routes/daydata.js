@@ -4,15 +4,13 @@ const db = require('../db');
 
 // daydata route
 //get all day data
-router.get('/', async (req, res, next) => {
-	try {
-		let results = await db.allDays();
+
+router.get('/', (req, res, next) => {
+	let sql = `SELECT * FROM DayData`;
+	db.query(sql, (err, results) => {
+		if (err) throw err;
 		res.json(results);
-	} catch (e) {
-		console.log(e);
-		res.sendStatus(500);
-	}
+	});
 });
 
-
-module.exports = router
+module.exports = router;
