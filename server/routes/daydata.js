@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
 	let sql = `SELECT * FROM DayData`;
 	db.query(sql, (err, results) => {
 		if (err) throw err;
-		res.json(results);
+		res.end(JSON.stringify(results));
 	});
 });
 
