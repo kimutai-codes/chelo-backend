@@ -33,6 +33,26 @@ router.post('/', (req, res, next) => {
 	});
 });
 
-//TODO  route to update a record => use put request
+//route to update a record => use put request
+router.put('/:id', (req, res) => {
+	let sql =
+		'UPDATE feeder SET `first_name`=?, `second_name`=?, `feeder_email`=?, `feeder_phone`=?, `is_admin`=?, `feeder_password`=? WHERE id=?';
+	db.query(
+		sql,
+		[
+			req.body.first_name,
+			req.body.second_name,
+			req.body.feeder_email,
+			req.body.feeder_phone,
+			req.body.is_admin,
+			req.body.feeder_password,
+			req.params.id,
+		],
+		(err, results) => {
+			if (err) throw err;
+			res.json(results);
+		}
+	);
+});
 //TODO  route to delete a record => delete request
 module.exports = router;

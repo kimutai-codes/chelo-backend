@@ -24,14 +24,25 @@ router.get('/:id', (req, res, next) => {
 // route to create a record => use post request
 
 router.post('/', (req, res, next) => {
-	let newFeeder = req.body; //the data will be send through the body
-	console.log(newFeeder);
+	let newFeed = req.body; //the data will be send through the body
 	let sql = `INSERT INTO feeds SET ?`;
-	db.query(sql, newFeeder, (err, results) => {
+	db.query(sql, newFeed, (err, results) => {
 		if (err) throw err;
 		res.json(results); //server response
 	});
 });
-//TODO  route to update a record => use put request
+//  route to update a record => use put request
+router.put('/:id', (req, res) => {
+	let sql = 'UPDATE feeds SET `feed_name`=?,`feed_price`=? WHERE id=?';
+	db.query(
+		sql,
+		[req.body.feed_name, req.body.feed_price, req.params.id],
+		(err, results) => {
+			if (err) throw err;
+			res.json(results);
+		}
+	);
+});
+
 //TODO  route to delete a record => delete request
 module.exports = router;
