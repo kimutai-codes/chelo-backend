@@ -13,18 +13,26 @@ router.get('/', (req, res, next) => {
 	});
 });
 
-//get one feeder by id
+// get one feeder by id
 router.get('/:id', (req, res, next) => {
 	let sql = `SELECT * FROM feeder WHERE id = ?`;
 	db.query(sql, [req.params.id], (err, results) => {
 		if (err) throw err;
-		// res.end(JSON.stringify(results));
-    res.json(results)
+		res.json(results);
 	});
 });
 
-//TODO route to create a record
-//TODO  route to update a record
-//TODO  route to delete a record
+// route to create a record => use post request
+router.post('/', (req, res, next) => {
+	let newFeeder = req.body; //the data will be send through the body
+	console.log(newFeeder);
+	let sql = `INSERT INTO feeder SET ?`;
+	db.query(sql, newFeeder, (err, results) => {
+		if (err) throw err;
+		res.json(results); //server response
+	});
+});
 
+//TODO  route to update a record => use put request
+//TODO  route to delete a record => delete request
 module.exports = router;
