@@ -13,7 +13,6 @@ router.get('/', (req, res, next) => {
 });
 
 //fetch specific day
-//TODO make it accurate
 //can use datetime format to make it unique and then in the ui just use the date part for convenience
 router.get('/:id', (req, res, next) => {
 	let sql = `SELECT * FROM DayData WHERE day_recorded = ?`;
@@ -33,7 +32,7 @@ router.post('/', (req, res, next) => {
 		console.log(req.body);
 	});
 });
-//TODO  route to update a record => use put request
+//  route to update a record => use put request
 
 router.put('/:id', (req, res) => {
 	let sql =
@@ -56,8 +55,16 @@ router.put('/:id', (req, res) => {
 			res.json(results);
 		}
 	);
-  console.log(req.params);
+	console.log(req.params);
 });
-//TODO  route to delete a record => delete request
+
+//  route to delete a record => delete request
+router.delete('/:id', (req, res) => {
+	let sql = 'DELETE FROM DayData WHERE day_recorded = ?';
+	db.query(sql, [req.params.id], (err, results) => {
+		if (err) throw err;
+		res.json(results);
+	});
+});
 
 module.exports = router;

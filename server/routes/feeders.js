@@ -54,5 +54,14 @@ router.put('/:id', (req, res) => {
 		}
 	);
 });
-//TODO  route to delete a record => delete request
+
+//  route to delete a record => delete request
+router.delete('/:id', (req, res) => {
+	let sql = 'DELETE FROM feeder WHERE id = ?';
+	db.query(sql, [req.params.id], (err, results) => {
+		if (err) throw err;
+		res.json(results);
+	});
+});
+
 module.exports = router;
