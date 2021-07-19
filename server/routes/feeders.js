@@ -9,7 +9,6 @@ router.get('/', (req, res, next) => {
 	db.query(sql, (err, results) => {
 		if (err) throw err;
 		res.json(results);
-		console.log(results);
 	});
 });
 
@@ -25,7 +24,6 @@ router.get('/:id', (req, res, next) => {
 // route to create a record => use post request
 router.post('/', (req, res, next) => {
 	let newFeeder = req.body; //the data will be send through the body
-	console.log(newFeeder);
 	let sql = `INSERT INTO feeder SET ?`;
 	db.query(sql, newFeeder, (err, results) => {
 		if (err) throw err;

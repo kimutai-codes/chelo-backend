@@ -20,3 +20,5 @@ app.listen(process.env.PORT || '3000', () => {
 		`server is up and runing on port: ${process.env.PORT || '3000'}`
 	);
 });
+
+// TODO secure the API
