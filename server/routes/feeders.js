@@ -82,4 +82,26 @@ router.post("/login", (req, res) => {
   );
 });
 
+router.post("/admin", (req, res) => {
+  let sql =
+    "SELECT * FROM feeder WHERE `first_name`=? AND `second_name`=? AND `feeder_password`=? AND `is_admin`=1";
+  db.query(
+    sql,
+    [req.body.first_name, req.body.second_name, req.body.feeder_password],
+    (err, results) => {
+      if (err) {
+        res.send({ err: err });
+      }
+
+      if (results.length > 0) {
+        res.send(results);
+      } else {
+        res.send({
+          message: "Either you're NOT ADMIN, or you typed it all wrong",
+        });
+      }
+    }
+  );
+});
+
 module.exports = router;
